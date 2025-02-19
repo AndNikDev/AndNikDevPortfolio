@@ -1,5 +1,6 @@
 "use client";
 
+import NewSkills from "@/components/NewSkills";
 import ProfileCard from "@/components/ProfileCard";
 import Skills from "@/components/Skills";
 
@@ -33,7 +34,9 @@ export default function Home() {
           <div className="bg-gray-800 p-6 rounded-lg shadow-md">
             <Skills />
           </div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">New Skills</div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+            <NewSkills />
+          </div>
           <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 9</div>
         </div>
       </div>
