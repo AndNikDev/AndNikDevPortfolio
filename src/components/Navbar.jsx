@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full bg-black text-white flex items-center justify-between shadow-md font-geist">
       <div className="flex items-center w-full">
-        <div className="bg-gray-900 px-6 py-3 text-2xl font-bold relative">
+        <div className="bg-gray-900 px-9 py-3 text-2xl font-bold relative">
           <span className="animate-gradient bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 bg-clip-text text-transparent">
             AndNik.Dev
           </span>
