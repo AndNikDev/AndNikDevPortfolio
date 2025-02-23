@@ -4,8 +4,14 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [data, setData] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
     const fetchData = async () => {
       try {
         const response = await fetch("/api/github-stats");
@@ -19,18 +25,22 @@ export default function Navbar() {
     fetchData();
     const interval = setInterval(fetchData, 1800000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isClient]);
+
+  if (!isClient) return null;
 
   return (
-    <nav className="fixed top-0 w-full bg-black text-white flex items-center justify-between px-6 py-3 shadow-md">
-      <div className="text-2xl font-bold relative overflow-hidden">
-        <span className="animate-gradient bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 bg-clip-text text-transparent">
-          AndNik.Dev
-        </span>
-      </div>
-      <div className="hidden md:flex items-center space-x-4">
-        <span className="text-gray-400">GitHub stats</span>
-        <div className="relative flex space-x-4">
+    <nav className="fixed top-0 w-full bg-black text-white flex items-center justify-between shadow-md font-geist">
+      <div className="flex items-center w-full">
+        <div className="bg-gray-900 px-6 py-3 text-2xl font-bold relative">
+          <span className="animate-gradient bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 bg-clip-text text-transparent">
+            AndNik.Dev
+          </span>
+        </div>
+        <div className="bg-black px-6 py-3 text-gray-400 text-xl font-semibold border-l border-gray-700">
+          GitHub Stats
+        </div>
+        <div className="flex items-center space-x-4 ml-auto pr-6">
           {data ? (
             [
               { label: "Stars", value: data?.stars || 0, icon: "⭐" },
@@ -42,21 +52,21 @@ export default function Navbar() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="relative flex items-center transition-transform duration-300"
+                className="relative flex items-center transition-all duration-500 ease-out overflow-hidden"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="flex items-center justify-center w-12 h-12 bg-gray-800 rounded-full text-lg">
-                  {stat.icon}
-                </div>
                 <div
-                  className={`absolute left-full ml-3 bg-gray-900 text-white px-3 py-1 rounded transition-opacity duration-300 transform ${
-                    hoveredIndex === index
-                      ? "translate-x-0 opacity-100"
-                      : "-translate-x-4 opacity-0"
-                  }`}
+                  className={`flex items-center justify-center bg-gray-800 text-lg rounded-full transition-all duration-500 ease-out ${
+                    hoveredIndex === index ? "w-32 px-4" : "w-12"
+                  } h-12`}
                 >
-                  {stat.label}: {stat.value}
+                  {hoveredIndex === index && (
+                    <span className="mr-2 text-white transition-opacity duration-500 ease-out opacity-100 whitespace-nowrap">
+                      {stat.value} {stat.label}
+                    </span>
+                  )}
+                  {stat.icon}
                 </div>
               </div>
             ))
