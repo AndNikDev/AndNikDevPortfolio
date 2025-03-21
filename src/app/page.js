@@ -1,6 +1,7 @@
 "use client";
 
 import ProfileCard from "@/components/ProfileCard";
+import Skills from "@/components/Skills";
 
 export default function Home() {
   return (
@@ -11,27 +12,28 @@ export default function Home() {
           <div>
             <ProfileCard />
           </div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 2</div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 3</div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md">Sobre Mí</div>
         </div>
 
         {/* Columna 2 (Más grande) */}
         <div className="flex flex-col space-y-4 col-span-3">
           <div className="bg-gray-800 p-8 rounded-lg shadow-md h-40">
-            Card 4 (Grande)
+            Experiencia
           </div>
           <div className="bg-gray-800 p-8 rounded-lg shadow-md h-40">
-            Card 5 (Grande)
+            Proyectos
           </div>
           <div className="bg-gray-800 p-8 rounded-lg shadow-md h-40">
-            Card 6 (Grande)
+            opcional partir este en dos, pero decido despues
           </div>
         </div>
 
         {/* Columna 3 (Más pequeña) */}
         <div className="flex flex-col space-y-4 col-span-2">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 7</div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 8</div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+            <Skills />
+          </div>
+          <div className="bg-gray-800 p-6 rounded-lg shadow-md">New Skills</div>
           <div className="bg-gray-800 p-6 rounded-lg shadow-md">Card 9</div>
         </div>
       </div>
