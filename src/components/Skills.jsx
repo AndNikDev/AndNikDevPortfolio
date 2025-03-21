@@ -9,6 +9,7 @@ import {
   SkillIconsJavascript,
   SkillIconsLinuxDark,
   SkillIconsMongodb,
+  SkillIconsMysqlDark,
   SkillIconsNodejsDark,
   SkillIconsReactDark,
 } from "@/images/icones-bags-jsx/IconsExports";
@@ -27,6 +28,7 @@ function Skills() {
         <SkillIconsJavascript className="w-full h-auto max-w-10" />
         <SkillIconsLinuxDark className="w-full h-auto max-w-10" />
         <SkillIconsMongodb className="w-full h-auto max-w-10" />
+        <SkillIconsMysqlDark className="w-full h-auto max-w-10" />
         <SkillIconsNodejsDark className="w-full h-auto max-w-10" />
         <SkillIconsReactDark className="w-full h-auto max-w-10" />
       </div>
