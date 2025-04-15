@@ -25,9 +25,10 @@ const icons = [
 
 function NewSkills() {
   return (
-    <div className="w-full  max-w-xl mx-auto text-center">
+    <div className="w-full max-w-xl mx-auto">
+      <h1 className="text-2xl geist-font">{"</Learning>"}</h1>
       <Swiper
-        slidesPerView={5}
+        slidesPerView={4}
         spaceBetween={0}
         loop={true}
         speed={1750}

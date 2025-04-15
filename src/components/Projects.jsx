@@ -1,15 +1,15 @@
 import React from "react";
 
-function Experience() {
+function Projects() {
   return (
-    <div className="">
+    <div>
       <h1 className="text-2xl geist-font mb-4">
         {"<"}
-        <span className="underline ">Experience</span>
+        <span className="underline ">Projects</span>
         {"/>"}
       </h1>
     </div>
   );
 }
 
-export default Experience;
+export default Projects;

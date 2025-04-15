@@ -11,8 +11,8 @@ import {
 
 export default function ProfileCard() {
   return (
-    <div className="relative p-6 rounded-lg shadow-md flex flex-col items-center text-center pt-16">
-      <div className="absolute -top-16 w-40 h-40 pt-12 bg-gray-700 shadow-lg flex items-center justify-center rounded-md overflow-hidden">
+    <div className="relative rounded-lg shadow-md flex flex-col items-center text-center pt-16">
+      <div className="absolute -top-[6.5rem] w-40 h-40 pt-12 bg-gray-700 shadow-lg flex items-center justify-center rounded-md overflow-hidden">
         <Image
           src="/profile.png"
           alt="Profile Picture"
@@ -22,12 +22,12 @@ export default function ProfileCard() {
           priority
         />
       </div>
-      <h2 className="text-xl font-semibold mt-10">
+      <h2 className="text-xl font-semibold mt-1">
         Andrew Nikolayk Muñoz Álvarez
       </h2>
       <p className="text-gray-400">@AndNikDev</p>
-      <p className="mt-2 text-sm text-gray-300">
-        Desarrollador web y apasionado por la tecnología.
+      <p className="mt-2 text-sm text-gray-300 text-balance">
+        Frontend Developer | Web3 Learner | Tech Explorer.
       </p>
       <div className="mt-4 flex space-x-4">
         <a

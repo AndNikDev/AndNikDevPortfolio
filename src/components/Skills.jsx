@@ -35,13 +35,13 @@ const icons = [
 
 function Skills() {
   return (
-    <div className="w-full max-w-xl mx-auto text-center">
-      <h1 className="text-2xl geist-font mb-4">Skills</h1>
+    <div className="w-full max-w-xl mx-auto">
+      <h1 className="text-2xl geist-font">{"<Skills>"}</h1>
       <Swiper
-        slidesPerView={5}
+        slidesPerView={4}
         spaceBetween={0}
         loop={true}
-        speed={1750} // ¡Esto es la clave!
+        speed={1750}
         autoplay={{
           delay: 1,
           disableOnInteraction: false,
