@@ -2,13 +2,16 @@ import React from "react";
 
 function Experience() {
   return (
-    <div>
-      <h1 className="text-2xl geist-font mb-4">
-        {"<"}
-        <span className="underline">Experience</span>
-        {"/>"}
-      </h1>
-      <div className="px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
+    <section>
+      <header>
+        <h1 className="text-2xl font-geist mb-4">
+          {"<"}
+          <span className="underline">Experience</span>
+          {"/>"}
+        </h1>
+      </header>
+
+      <article className="px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
         <ul className="list-disc list-outside text-sm text-balance leading-relaxed text-gray-200 space-y-2 ml-4">
           <li>
             Frontend Developer at ExampleCorp — Built and maintained UI
@@ -23,8 +26,8 @@ function Experience() {
             resolved frontend issues in community-driven projects.
           </li>
         </ul>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 

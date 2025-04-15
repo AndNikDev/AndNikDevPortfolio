@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
@@ -11,8 +10,8 @@ import {
 
 export default function ProfileCard() {
   return (
-    <div className="relative rounded-lg shadow-md flex flex-col items-center text-center pt-16">
-      <div className="absolute -top-[6.5rem] w-40 h-40  bg-gray-700 shadow-lg flex items-center justify-center rounded-md overflow-hidden">
+    <section className="relative rounded-lg shadow-md flex flex-col items-center pt-16 text-center">
+      <figure className="absolute -top-[6.5rem] w-40 h-40 bg-gray-700 shadow-lg flex items-center justify-center rounded-md overflow-hidden">
         <Image
           src="/profile.jpg"
           alt="Profile Picture"
@@ -21,18 +20,22 @@ export default function ProfileCard() {
           className="rounded-md object-cover"
           priority
         />
-      </div>
-      <div className="w-full max-w-md px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
-        <h2 className="text-xl font-geist font-semibold text-center">
+      </figure>
+
+      <article className="w-full max-w-md px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
+        <h2 className="text-xl font-geist font-semibold">
           Andrew Nikolayk Muñoz Álvarez
         </h2>
-        <p className="text-gray-400 text-center">@AndNikDev</p>
-        <p className="mt-3 text-sm text-gray-300 text-balance text-center leading-relaxed">
+        <p className="text-gray-400">@AndNikDev</p>
+        <p className="mt-3 text-sm text-gray-300 text-balance leading-relaxed">
           Frontend Developer&nbsp;|&nbsp;Web3 Learner&nbsp;|&nbsp;Tech Explorer
         </p>
 
         {/* Redes sociales */}
-        <div className="mt-4 flex justify-center space-x-4">
+        <nav
+          className="mt-4 flex justify-center space-x-4"
+          aria-label="Social Media Links"
+        >
           <a
             href="https://github.com/andnikdev"
             target="_blank"
@@ -57,9 +60,8 @@ export default function ProfileCard() {
           >
             <FontAwesomeIcon icon={faLinkedin} className="text-2xl" />
           </a>
-        </div>
-      </div>
-    </div>
+        </nav>
+      </article>
+    </section>
   );
 }
-

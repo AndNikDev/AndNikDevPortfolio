@@ -1,73 +1,87 @@
-export async function GET(req) {
+export async function GET() {
   const GITHUB_USERNAME = "andnikdev";
-  const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}`;
-  const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
-  const GITHUB_EVENTS_URL = `https://api.github.com/users/${GITHUB_USERNAME}/events`;
-  const GITHUB_PR_URL = `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr`;
-  const GITHUB_ISSUES_URL = `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:issue`;
+  const GITHUB_GRAPHQL_URL = "https://api.github.com/graphql";
+
+  const headers = {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    "Content-Type": "application/json",
+  };
+
+  const query = `
+    {
+      user(login: "${GITHUB_USERNAME}") {
+        repositories(first: 100, isFork: false, ownerAffiliations: OWNER) {
+          nodes {
+            stargazerCount
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+        }
+        totalRepos: repositories {
+          totalCount
+        }
+        pullRequests {
+          totalCount
+        }
+        issues {
+          totalCount
+        }
+        followers {
+          totalCount
+        }
+      }
+    }
+  `;
 
   try {
-    const headers = { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` };
+    const res = await fetch(GITHUB_GRAPHQL_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ query }),
+    });
 
-    const [
-      userResponse,
-      reposResponse,
-      eventsResponse,
-      prResponse,
-      issuesResponse,
-    ] = await Promise.all([
-      fetch(GITHUB_API_URL, { headers }),
-      fetch(GITHUB_REPOS_URL, { headers }),
-      fetch(GITHUB_EVENTS_URL, { headers }),
-      fetch(GITHUB_PR_URL, { headers }),
-      fetch(GITHUB_ISSUES_URL, { headers }),
-    ]);
+    const json = await res.json();
 
-    if (
-      !userResponse.ok ||
-      !reposResponse.ok ||
-      !eventsResponse.ok ||
-      !prResponse.ok ||
-      !issuesResponse.ok
-    ) {
+    if (json.errors || !json.data) {
       return new Response(
-        JSON.stringify({ error: "Error fetching data from GitHub" }),
+        JSON.stringify({ error: json.errors || "No data returned from GitHub" }),
         { status: 500 }
       );
     }
 
-    const [userData, reposData, eventsData, prData, issuesData] =
-      await Promise.all([
-        userResponse.json(),
-        reposResponse.json(),
-        eventsResponse.json(),
-        prResponse.json(),
-        issuesResponse.json(),
-      ]);
+    const repos = json.data.user.repositories.nodes;
 
-    const totalStars = reposData.reduce(
-      (sum, repo) => sum + repo.stargazers_count,
-      0
-    );
-    const totalCommits = eventsData
-      .filter((event) => event.type === "PushEvent")
-      .reduce((sum, event) => sum + event.payload.commits.length, 0);
-    const totalPRs = prData.total_count;
-    const totalIssues = issuesData.total_count;
+    const totalStars = repos.reduce((acc, repo) => acc + repo.stargazerCount, 0);
+    const totalCommits = repos.reduce((acc, repo) => {
+      const commits = repo.defaultBranchRef?.target?.history?.totalCount || 0;
+      return acc + commits;
+    }, 0);
 
-    return new Response(
-      JSON.stringify({
-        stars: totalStars,
-        commits: totalCommits,
-        prs: totalPRs,
-        issues: totalIssues,
-        followers: userData.followers,
-        public_repos: userData.public_repos,
-      }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+    const stats = {
+      stars: totalStars,
+      commits: totalCommits,
+      prs: json.data.user.pullRequests.totalCount,
+      issues: json.data.user.issues.totalCount,
+      followers: json.data.user.followers.totalCount,
+      public_repos: json.data.user.totalRepos.totalCount,
+    };
+
+    const filteredStats = Object.fromEntries(
+      Object.entries(stats).filter(([_, value]) => value > 0)
     );
-  } catch (error) {
-    console.error("GitHub API error:", error);
+
+    return new Response(JSON.stringify(filteredStats), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
     });

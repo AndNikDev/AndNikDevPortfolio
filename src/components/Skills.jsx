@@ -35,8 +35,15 @@ const icons = [
 
 function Skills() {
   return (
-    <div className="w-full max-w-xl mx-auto">
-      <h1 className="text-2xl geist-font">{"<Skills>"}</h1>
+    <section className="w-full max-w-xl mx-auto">
+      <header>
+        <h1 className="text-2xl font-geist mb-4">
+          {"<"}
+          <span className="underline">Skills</span>
+          {"/>"}
+        </h1>
+      </header>
+
       <Swiper
         slidesPerView={4}
         spaceBetween={0}
@@ -48,6 +55,7 @@ function Skills() {
         }}
         modules={[Autoplay]}
         className="overflow-hidden"
+        aria-label="Skills carousel"
       >
         {icons.map((Icon, index) => (
           <SwiperSlide key={index}>
@@ -57,7 +65,7 @@ function Skills() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 }
 

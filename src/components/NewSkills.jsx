@@ -25,8 +25,15 @@ const icons = [
 
 function NewSkills() {
   return (
-    <div className="w-full max-w-xl mx-auto">
-      <h1 className="text-2xl geist-font">{"</Learning>"}</h1>
+    <section className="w-full max-w-xl mx-auto">
+      <header>
+        <h1 className="text-2xl font-geist mb-4">
+          {"<"}
+          <span className="underline">Learning</span>
+          {"/>"}
+        </h1>
+      </header>
+
       <Swiper
         slidesPerView={4}
         spaceBetween={0}
@@ -39,6 +46,7 @@ function NewSkills() {
         }}
         modules={[Autoplay]}
         className="overflow-hidden"
+        aria-label="Technologies I'm learning"
       >
         {icons.map((Icon, index) => (
           <SwiperSlide key={index}>
@@ -48,7 +56,7 @@ function NewSkills() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 }
 

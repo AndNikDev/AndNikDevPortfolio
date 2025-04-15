@@ -1,6 +1,7 @@
 import BackgroundBlobs from "@/components/BackgroundBlobs";
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased text-white bg-black relative min-h-screen">
         <BackgroundBlobs />
+        <Navbar />
         <main className="relative z-10">{children}</main>
       </body>
     </html>
