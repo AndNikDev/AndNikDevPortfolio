@@ -1,4 +1,8 @@
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+
 import {
   SkillIconsBashDark,
   SkillIconsCss,
@@ -14,25 +18,46 @@ import {
   SkillIconsReactDark,
 } from "@/images/icones-bags-jsx/IconsExports";
 
+const icons = [
+  SkillIconsBashDark,
+  SkillIconsCss,
+  SkillIconsGit,
+  SkillIconsGithubDark,
+  SkillIconsHtml,
+  SkillIconsJavaDark,
+  SkillIconsJavascript,
+  SkillIconsLinuxDark,
+  SkillIconsMongodb,
+  SkillIconsMysqlDark,
+  SkillIconsNodejsDark,
+  SkillIconsReactDark,
+];
+
 function Skills() {
   return (
-    <>
-      <h1 className="h-10">Skills</h1>
-      <div className="w-full max-w-xs mx-auto grid grid-cols-4 gap-3 justify-items-center">
-        <SkillIconsBashDark className="w-full h-auto max-w-10" />
-        <SkillIconsCss className="w-full h-auto max-w-10" />
-        <SkillIconsGit className="w-full h-auto max-w-10" />
-        <SkillIconsGithubDark className="w-full h-auto max-w-10" />
-        <SkillIconsHtml className="w-full h-auto max-w-10" />
-        <SkillIconsJavaDark className="w-full h-auto max-w-10" />
-        <SkillIconsJavascript className="w-full h-auto max-w-10" />
-        <SkillIconsLinuxDark className="w-full h-auto max-w-10" />
-        <SkillIconsMongodb className="w-full h-auto max-w-10" />
-        <SkillIconsMysqlDark className="w-full h-auto max-w-10" />
-        <SkillIconsNodejsDark className="w-full h-auto max-w-10" />
-        <SkillIconsReactDark className="w-full h-auto max-w-10" />
-      </div>
-    </>
+    <div className="w-full max-w-xl mx-auto text-center">
+      <h1 className="text-2xl geist-font mb-4">Skills</h1>
+      <Swiper
+        slidesPerView={5}
+        spaceBetween={0}
+        loop={true}
+        speed={1750} // ¡Esto es la clave!
+        autoplay={{
+          delay: 1,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay]}
+        className="overflow-hidden"
+      >
+        {icons.map((Icon, index) => (
+          <SwiperSlide key={index}>
+            <div className="flex justify-center items-center h-24">
+              <Icon className="w-12 h-12" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ import {
 
 export default function ProfileCard() {
   return (
-    <div className="relative bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center text-center pt-16">
+    <div className="relative p-6 rounded-lg shadow-md flex flex-col items-center text-center pt-16">
       <div className="absolute -top-16 w-40 h-40 pt-12 bg-gray-700 shadow-lg flex items-center justify-center rounded-md overflow-hidden">
         <Image
           src="/profile.png"
