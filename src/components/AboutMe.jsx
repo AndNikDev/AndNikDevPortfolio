@@ -11,7 +11,7 @@ function AboutMe() {
         </h1>
       </header>
 
-      <div className="text-sm font-geistmono px-2 py-1 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md">
+      <div className="text-sm font-geistmono px-2 py-1 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md text-gray-300 border border-zinc-700">
         <p className="leading-relaxed">
           <span className="underline decoration-wavy decoration-pink-500/50">
             Frontend developer

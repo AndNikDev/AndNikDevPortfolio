@@ -1,6 +1,33 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// 🔁 Traducción simple simulada
+const t = {
+  en: {
+    githubStats: "GitHub Stats:",
+    stars: "Stars",
+    commits: "Commits",
+    prs: "Pull Requests",
+    issues: "Issues",
+    followers: "Followers",
+    repos: "Repositories",
+    loading: "Loading...",
+  },
+  es: {
+    githubStats: "Estadísticas de GitHub:",
+    stars: "Estrellas",
+    commits: "Commits",
+    prs: "Pull Requests",
+    issues: "Issues",
+    followers: "Seguidores",
+    repos: "Repositorios",
+    loading: "Cargando...",
+  },
+};
+
+// Simulamos idioma actual (esto después lo manejará el framework de i18n)
+const currentLang = "en"; // Cambia a "es" para español
+
 export default function Navbar() {
   const [data, setData] = useState(null);
 
@@ -22,13 +49,13 @@ export default function Navbar() {
 
   const stats = data
     ? [
-        { label: "Stars", value: data?.stars, icon: "⭐" },
-        { label: "Commits", value: data?.commits, icon: "📌" },
-        { label: "PRs", value: data?.prs, icon: "🔀" },
-        { label: "Issues", value: data?.issues, icon: "🐛" },
-        { label: "Followers", value: data?.followers, icon: "👥" },
-        { label: "Repos", value: data?.public_repos, icon: "📂" },
-      ].filter((stat) => stat.value && stat.value > 0) // 🧽 Filtramos vacíos
+        { label: t[currentLang].stars, value: data?.stars, icon: "⭐" },
+        { label: t[currentLang].commits, value: data?.commits, icon: "📌" },
+        { label: t[currentLang].prs, value: data?.prs, icon: "🔀" },
+        { label: t[currentLang].issues, value: data?.issues, icon: "🐛" },
+        { label: t[currentLang].followers, value: data?.followers, icon: "👥" },
+        { label: t[currentLang].repos, value: data?.public_repos, icon: "📂" },
+      ].filter((stat) => stat.value && stat.value > 0)
     : [];
 
   return (
@@ -42,23 +69,25 @@ export default function Navbar() {
         </div>
 
         {/* GitHub Stats */}
-
         <div className="flex space-x-3 text-sm">
           <div className="flex gap-2 text-md py-1 text-zinc-400 mr-2">
-            GitHub Stats:
+            {t[currentLang].githubStats}
           </div>
           {stats.length > 0 ? (
             stats.map((stat, index) => (
               <div
                 key={index}
                 className="flex items-center gap-1 px-3 py-1 bg-zinc-800/60 rounded-full text-zinc-300 hover:text-white transition-colors"
+                title={stat.label}
               >
                 <span>{stat.icon}</span>
                 <span className="hidden md:inline">{stat.value}</span>
               </div>
             ))
           ) : (
-            <span className="text-zinc-500 italic">Cargando...</span>
+            <span className="text-zinc-500 italic">
+              {t[currentLang].loading}
+            </span>
           )}
         </div>
       </div>

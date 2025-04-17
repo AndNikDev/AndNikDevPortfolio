@@ -16,33 +16,33 @@ export default function Home() {
 
           {/* Columna 1: Perfil y Sobre mí */}
           <aside className="flex flex-col space-y-4 md:col-span-3 items-center md:items-start mt-20">
-            <section className="border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
+            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
               <ProfileCard />
             </section>
-            <section className="border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
+            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
               <AboutMe />
             </section>
           </aside>
 
           {/* Columna 2: Experiencia y Proyectos */}
           <section className="flex flex-col space-y-4 md:col-span-5 items-center md:items-start">
-            <article className="border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
+            <article className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
               <Experience />
             </article>
-            <article className="border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
+            <article className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
               <Projects />
             </article>
           </section>
 
           {/* Columna 3: Habilidades y Frase */}
           <aside className="flex flex-col space-y-4 md:col-span-2 items-center md:items-start">
-            <section className="border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
+            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
               <Skills />
             </section>
-            <section className="border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
+            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
               <NewSkills />
             </section>
-            <section className="border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
+            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
               <Phrase />
             </section>
           </aside>

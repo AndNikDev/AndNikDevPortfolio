@@ -11,8 +11,8 @@ function Experience() {
         </h1>
       </header>
 
-      <article className="px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
-        <ul className="list-disc list-outside text-sm text-balance leading-relaxed text-gray-200 space-y-2 ml-4">
+      <article className="p-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono border border-zinc-700">
+        <ul className="list-disc list-outside text-sm text-balance leading-relaxed text-gray-300 space-y-2 ml-4 ">
           <li>
             Frontend Developer at ExampleCorp — Built and maintained UI
             components using React and TailwindCSS in a production environment.

@@ -22,7 +22,7 @@ export default function ProfileCard() {
         />
       </figure>
 
-      <article className="w-full max-w-md px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono">
+      <article className="w-full max-w-md px-6 py-4 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md font-geistmono border border-zinc-700">
         <h2 className="text-xl font-geist font-semibold">
           Andrew Nikolayk Muñoz Álvarez
         </h2>
