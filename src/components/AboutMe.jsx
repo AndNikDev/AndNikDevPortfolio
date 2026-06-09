@@ -1,35 +1,24 @@
-import React from "react";
 
-function AboutMe() {
+
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
+import { UserCircle } from "lucide-react";
+
+export default function AboutMe() {
   return (
-    <section>
-      <header>
-        <h1 className="text-2xl font-geist mb-4">
-          {"<"}
-          <span className="underline">AboutMe</span>
-          {"/>"}
-        </h1>
-      </header>
-
-      <div className="text-sm font-geistmono px-2 py-1 bg-zinc-800/60 backdrop-blur-md rounded-md shadow-md text-gray-300 border border-zinc-700">
-        <p className="leading-relaxed">
-          <span className="underline decoration-wavy decoration-pink-500/50">
-            Frontend developer
-          </span>{" "}
-          with 1+ year of experience crafting responsive and user-focused web
-          applications. Currently expanding my skill set into blockchain and{" "}
-          <span className="underline decoration-wavy decoration-sky-500/50">
-            Web3 development
-          </span>
-          , driven by a strong interest in{" "}
-          <span className="underline decoration-wavy decoration-emerald-500/50">
-            decentralized technologies
-          </span>{" "}
-          and their potential to shape the future of the web.
+    <Card className="group h-full">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <UserCircle className="text-purple-400" size={24} />
+          <span>About Me</span>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-base leading-relaxed text-zinc-300">
+          I'm a <span className="text-white font-medium">Frontend Developer</span> with over a year of experience crafting responsive, performant, and user-focused web applications. 
+          <br /><br />
+          Currently, I'm expanding my skill set into <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-medium">blockchain</span> and <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 font-medium">Web3 development</span>. I am deeply driven by a strong interest in decentralized technologies and their potential to fundamentally shape the future of the internet.
         </p>
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }
-
-export default AboutMe;

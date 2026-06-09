@@ -7,6 +7,22 @@ export async function GET() {
     "Content-Type": "application/json",
   };
 
+  if (!process.env.GITHUB_TOKEN) {
+    try {
+      const fallbackRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+      const fallbackData = await fallbackRes.json();
+      return new Response(JSON.stringify({
+        followers: fallbackData.followers || 0,
+        public_repos: fallbackData.public_repos || 0,
+      }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (e) {
+      return new Response(JSON.stringify({}), { status: 200 });
+    }
+  }
+
   const query = `
     {
       user(login: "${GITHUB_USERNAME}") {

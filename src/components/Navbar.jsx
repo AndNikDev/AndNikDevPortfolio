@@ -1,32 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-
-// 🔁 Traducción simple simulada
-const t = {
-  en: {
-    githubStats: "GitHub Stats:",
-    stars: "Stars",
-    commits: "Commits",
-    prs: "Pull Requests",
-    issues: "Issues",
-    followers: "Followers",
-    repos: "Repositories",
-    loading: "Loading...",
-  },
-  es: {
-    githubStats: "Estadísticas de GitHub:",
-    stars: "Estrellas",
-    commits: "Commits",
-    prs: "Pull Requests",
-    issues: "Issues",
-    followers: "Seguidores",
-    repos: "Repositorios",
-    loading: "Cargando...",
-  },
-};
-
-// Simulamos idioma actual (esto después lo manejará el framework de i18n)
-const currentLang = "en"; // Cambia a "es" para español
+import { Star, GitCommit, GitPullRequest, CircleDot, Users, FolderDot } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Navbar() {
   const [data, setData] = useState(null);
@@ -49,48 +25,51 @@ export default function Navbar() {
 
   const stats = data
     ? [
-        { label: t[currentLang].stars, value: data?.stars, icon: "⭐" },
-        { label: t[currentLang].commits, value: data?.commits, icon: "📌" },
-        { label: t[currentLang].prs, value: data?.prs, icon: "🔀" },
-        { label: t[currentLang].issues, value: data?.issues, icon: "🐛" },
-        { label: t[currentLang].followers, value: data?.followers, icon: "👥" },
-        { label: t[currentLang].repos, value: data?.public_repos, icon: "📂" },
+        { label: "Stars", value: data?.stars, icon: Star },
+        { label: "Commits", value: data?.commits, icon: GitCommit },
+        { label: "PRs", value: data?.prs, icon: GitPullRequest },
+        { label: "Issues", value: data?.issues, icon: CircleDot },
+        { label: "Followers", value: data?.followers, icon: Users },
+        { label: "Repos", value: data?.public_repos, icon: FolderDot },
       ].filter((stat) => stat.value && stat.value > 0)
     : [];
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 shadow-sm">
-      <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between font-geist text-white">
+    <div className="fixed top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+      <nav className="pointer-events-auto bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-6 py-3 flex items-center gap-6 font-geist text-white max-w-full overflow-x-auto no-scrollbar">
         {/* Logo */}
-        <div className="text-xl font-bold tracking-tight">
-          <span className="animate-gradient bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 bg-clip-text text-transparent">
+        <div className="text-lg font-bold tracking-tight shrink-0">
+          <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             AndNik.Dev
           </span>
         </div>
 
         {/* GitHub Stats */}
-        <div className="flex space-x-3 text-sm">
-          <div className="flex gap-2 text-md py-1 text-zinc-400 mr-2">
-            {t[currentLang].githubStats}
+        <div className="flex items-center gap-4 text-sm shrink-0">
+          <div className="hidden sm:flex items-center gap-2 text-zinc-400 pr-4 border-r border-white/10">
+            <FontAwesomeIcon icon={faGithub} className="text-base" />
+            <span>Stats</span>
           </div>
           {stats.length > 0 ? (
-            stats.map((stat, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-1 px-3 py-1 bg-zinc-800/60 rounded-full text-zinc-300 hover:text-white transition-colors"
-                title={stat.label}
-              >
-                <span>{stat.icon}</span>
-                <span className="hidden md:inline">{stat.value}</span>
-              </div>
-            ))
+            <div className="flex gap-4">
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors cursor-default"
+                  title={stat.label}
+                >
+                  <stat.icon size={14} className="text-cyan-400" />
+                  <span className="font-medium">{stat.value}</span>
+                </div>
+              ))}
+            </div>
           ) : (
-            <span className="text-zinc-500 italic">
-              {t[currentLang].loading}
-            </span>
+            <div className="flex gap-2">
+              <span className="w-4 h-4 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+            </div>
           )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
