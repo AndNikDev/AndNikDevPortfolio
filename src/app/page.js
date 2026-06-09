@@ -1,4 +1,4 @@
-"use client";
+
 
 import ProfileCard from "@/components/ProfileCard";
 import AboutMe from "@/components/AboutMe";
@@ -10,41 +10,27 @@ import Phrase from "@/components/Phrase";
 
 export default function Home() {
   return (
-    <main className="min-h-screen text-white font-geist px-4 py-6 pt-[4rem]">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-6">
+    <main className="min-h-screen text-white font-geist px-4 py-2 pt-20 overflow-x-hidden flex flex-col justify-center">
+      <div className="w-full max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-4 items-stretch">
 
           {/* Columna 1: Perfil y Sobre mí */}
-          <aside className="flex flex-col space-y-4 md:col-span-3 items-center md:items-start mt-20">
-            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
-              <ProfileCard />
-            </section>
-            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-md">
-              <AboutMe />
-            </section>
+          <aside className="flex flex-col gap-4 md:col-span-3 h-full">
+            <div className="shrink-0 flex flex-col"><ProfileCard /></div>
+            <div className="flex-1 flex flex-col [&>*]:flex-1"><AboutMe /></div>
           </aside>
 
           {/* Columna 2: Experiencia y Proyectos */}
-          <section className="flex flex-col space-y-4 md:col-span-5 items-center md:items-start">
-            <article className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
-              <Experience />
-            </article>
-            <article className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 p-8 rounded-md shadow-md w-full max-w-3xl">
-              <Projects />
-            </article>
+          <section className="flex flex-col gap-4 md:col-span-5 h-full">
+            <div className="flex-1 flex flex-col [&>*]:flex-1"><Experience /></div>
+            <div className="flex-1 flex flex-col [&>*]:flex-1"><Projects /></div>
           </section>
 
           {/* Columna 3: Habilidades y Frase */}
-          <aside className="flex flex-col space-y-4 md:col-span-2 items-center md:items-start">
-            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
-              <Skills />
-            </section>
-            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
-              <NewSkills />
-            </section>
-            <section className="bg-zinc-900/60 backdrop-blur-sm border border-zinc-600 rounded-md shadow-md p-6 w-full max-w-sm">
-              <Phrase />
-            </section>
+          <aside className="flex flex-col gap-4 md:col-span-2 h-full">
+            <div className="shrink-0 flex flex-col"><Skills /></div>
+            <div className="shrink-0 flex flex-col"><NewSkills /></div>
+            <div className="flex-1 flex flex-col [&>*]:flex-1"><Phrase /></div>
           </aside>
 
         </div>
