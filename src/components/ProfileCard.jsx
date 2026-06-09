@@ -18,8 +18,9 @@ export default function ProfileCard() {
         <Image
           src="/profile.jpg"
           alt="Profile Picture"
-          width={96}
-          height={96}
+          width={144}
+          height={144}
+          quality={100}
           className="rounded-full object-cover w-full h-full relative z-10 border-2 border-white/10"
           priority
         />
