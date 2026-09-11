@@ -1,48 +1,48 @@
-
-
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 import { FolderGit2, ExternalLink } from "lucide-react";
 
 export default function Projects() {
   const projects = [
     {
-      name: "DeFi Dashboard",
-      desc: "A sleek dashboard to track portfolio across multiple chains with real-time token pricing.",
-      tags: ["Next.js", "Tailwind", "Web3"],
-      link: "#"
+      name: "Data Analytics & BI Platform",
+      desc: "Interactive analytics dashboards and ETL pipelines transforming business datasets into actionable KPIs and metrics.",
+      tags: ["Python", "SQL", "Power BI", "PostgreSQL"],
+      link: "https://github.com/AndNikDev"
     },
     {
-      name: "NFT Marketplace",
-      desc: "Smart contract logic and modern frontend interface for minting digital assets.",
-      tags: ["Solidity", "React", "Ethers.js"],
-      link: "#"
+      name: "Full-Stack Web App",
+      desc: "Modern SaaS platform built with Next.js App Router, responsive design system, and robust database architecture.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind"],
+      link: "https://github.com/AndNikDev"
     }
   ];
 
   return (
-    <Card className="group h-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FolderGit2 className="text-emerald-400" size={24} />
+    <Card className="group h-full p-4">
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <FolderGit2 className="text-emerald-400" size={20} />
           <span>Featured Projects</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {projects.map((proj, i) => (
-            <div key={i} className="group/proj relative bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-white font-medium text-lg font-geist">{proj.name}</h3>
-                <a href={proj.link} className="text-zinc-500 hover:text-white transition-colors">
-                  <ExternalLink size={18} />
-                </a>
+            <div key={i} className="group/proj relative bg-white/[0.02] border border-white/5 rounded-xl p-3 hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <div className="flex justify-between items-start mb-1.5">
+                  <h3 className="text-white font-medium text-sm sm:text-base font-geist">{proj.name}</h3>
+                  <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+                    <ExternalLink size={15} />
+                  </a>
+                </div>
+                <p className="text-zinc-400 text-xs mb-2.5 leading-relaxed line-clamp-2">
+                  {proj.desc}
+                </p>
               </div>
-              <p className="text-zinc-400 text-xs mb-3 leading-relaxed line-clamp-2">
-                {proj.desc}
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {proj.tags.map((tag, j) => (
-                  <span key={j} className="text-xs font-geistmono px-2.5 py-1 bg-white/5 rounded-md text-zinc-300 border border-white/5">
+                  <span key={j} className="text-[11px] font-geistmono px-2 py-0.5 bg-white/5 rounded text-zinc-300 border border-white/5">
                     {tag}
                   </span>
                 ))}
@@ -50,8 +50,15 @@ export default function Projects() {
             </div>
           ))}
         </div>
-        <div className="mt-4 text-center">
-          <p className="text-xs text-zinc-500 italic">More projects coming soon...</p>
+        <div className="mt-2 text-center">
+          <a
+            href="https://github.com/AndNikDev?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] text-zinc-500 hover:text-cyan-400 transition-colors inline-flex items-center gap-1 font-geistmono"
+          >
+            Ver más repositorios en GitHub →
+          </a>
         </div>
       </CardContent>
     </Card>

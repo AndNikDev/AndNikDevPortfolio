@@ -6,6 +6,11 @@ import { formatDate } from "@/lib/posts";
 
 export default function BlogCard({ post }) {
   const { slug, meta } = post;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const coverSrc =
+    meta.cover?.startsWith("/") && !meta.cover.startsWith("//") && !meta.cover.startsWith(basePath)
+      ? `${basePath}${meta.cover}`
+      : meta.cover;
 
   return (
     <Link href={`/blog/${slug}`} className="block group h-full">
@@ -13,7 +18,7 @@ export default function BlogCard({ post }) {
         {meta.cover && (
           <div className="relative -m-5 mb-4 h-44 overflow-hidden rounded-t-2xl">
             <Image
-              src={meta.cover}
+              src={coverSrc}
               alt={meta.coverAlt || meta.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

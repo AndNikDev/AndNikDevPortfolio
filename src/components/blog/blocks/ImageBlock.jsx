@@ -1,6 +1,12 @@
 import Image from "next/image";
 
 export default function ImageBlock({ src, alt = "", caption, rounded = true }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const resolvedSrc =
+    src?.startsWith("/") && !src.startsWith("//") && !src.startsWith(basePath)
+      ? `${basePath}${src}`
+      : src;
+
   return (
     <figure className="my-6">
       <div
@@ -9,7 +15,7 @@ export default function ImageBlock({ src, alt = "", caption, rounded = true }) {
         }`}
       >
         <Image
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           width={1200}
           height={675}

@@ -1,18 +1,20 @@
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const site = {
-  title: "AndNikDev Portfolio",
-  description: "Portafolio y blog de Andrew Nikolayk Muñoz Álvarez",
-  url: "https://andnik.dev",
+  title: "AndNikDev | Nikolayk Muñoz",
+  description: "Portafolio y blog de Nikolayk Muñoz — Full Stack Developer & Data Analytics/Engineering",
+  url: "https://andnikdev.github.io/AndNikDevPortfolio",
 };
 
 export const author = {
   name: "Nikolayk Muñoz",
   username: "andnikdev",
-  avatar: "/profile.jpg",
-  bio: "Frontend Developer • Web3 Learner • Tech Explorer",
+  avatar: `${basePath}/profile.jpg`,
+  bio: "Full Stack Developer • AI-Augmented Engineer • Data Analytics & Engineering",
   email: "andnik.developer@gmail.com",
   links: {
     github: "https://github.com/andnikdev",
+    linkedin: "https://www.linkedin.com/in/nikolaykmunozalvarez/",
     twitter: "https://twitter.com/andnikdev",
-    linkedin: "https://linkedin.com/in/andnikdev",
   },
 };

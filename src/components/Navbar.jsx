@@ -70,8 +70,8 @@ export default function Navbar() {
     : [];
 
   return (
-    <div className="fixed top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-      <nav className="pointer-events-auto bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-6 py-3 flex items-center gap-6 font-geist text-white max-w-full overflow-x-auto no-scrollbar">
+    <header className="w-full flex justify-center px-4 pt-3 pb-1 shrink-0 relative z-20">
+      <nav className="bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.4)] rounded-full px-5 py-2 flex items-center gap-4 sm:gap-6 font-geist text-white max-w-full overflow-x-auto no-scrollbar">
         {/* Logo */}
         <Link href="/" className="text-lg font-bold tracking-tight shrink-0">
           <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
@@ -129,6 +129,6 @@ export default function Navbar() {
           )}
         </div>
       </nav>
-    </div>
+    </header>
   );
 }

@@ -23,10 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased text-white bg-black relative min-h-screen">
+      <body className="antialiased text-white bg-black relative min-h-screen flex flex-col">
         <BackgroundBlobs />
         <Navbar />
-        <main className="relative z-10">{children}</main>
+        <div className="relative z-10 flex-1 flex flex-col">{children}</div>
       </body>
     </html>
   );
