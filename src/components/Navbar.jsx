@@ -1,20 +1,55 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Star, GitCommit, GitPullRequest, CircleDot, Users, FolderDot } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Navbar() {
   const [data, setData] = useState(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
       try {
-        const response = await fetch("/api/github-stats");
-        const result = await response.json();
-        setData(result);
+        const response = await fetch(`${basePath}/github-stats.json`);
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+          return;
+        }
       } catch (error) {
-        console.error("Error fetching GitHub stats:", error);
+        console.warn("Could not fetch /github-stats.json, trying GitHub API:", error);
+      }
+
+      // Direct fallback to GitHub REST API
+      try {
+        const [userRes, reposRes] = await Promise.all([
+          fetch("https://api.github.com/users/andnikdev"),
+          fetch("https://api.github.com/users/andnikdev/repos?per_page=100"),
+        ]);
+        if (userRes.ok) {
+          const user = await userRes.json();
+          let stars = 0;
+          if (reposRes.ok) {
+            const repos = await reposRes.json();
+            if (Array.isArray(repos)) {
+              stars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
+            }
+          }
+          setData((prev) => ({
+            ...prev,
+            followers: user.followers || 0,
+            public_repos: user.public_repos || 0,
+            stars: stars,
+            commits: prev?.commits || 299,
+            prs: prev?.prs || 16,
+          }));
+        }
+      } catch (err) {
+        console.error("Error fetching GitHub stats fallback:", err);
       }
     };
 
@@ -38,10 +73,34 @@ export default function Navbar() {
     <div className="fixed top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav className="pointer-events-auto bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-full px-6 py-3 flex items-center gap-6 font-geist text-white max-w-full overflow-x-auto no-scrollbar">
         {/* Logo */}
-        <div className="text-lg font-bold tracking-tight shrink-0">
+        <Link href="/" className="text-lg font-bold tracking-tight shrink-0">
           <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             AndNik.Dev
           </span>
+        </Link>
+
+        {/* Navegación */}
+        <div className="flex items-center gap-1 text-sm shrink-0">
+          <Link
+            href="/"
+            className={`px-3 py-1.5 rounded-full transition-colors font-geistmono ${
+              pathname === "/"
+                ? "bg-white/10 text-white"
+                : "text-zinc-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/blog"
+            className={`px-3 py-1.5 rounded-full transition-colors font-geistmono ${
+              pathname?.startsWith("/blog")
+                ? "bg-white/10 text-white"
+                : "text-zinc-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            Blog
+          </Link>
         </div>
 
         {/* GitHub Stats */}

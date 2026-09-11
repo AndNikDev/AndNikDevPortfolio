@@ -1,0 +1,76 @@
+---
+title: "Introducción a Next.js 15 y el App Router"
+date: "2026-08-01"
+excerpt: "Mi primera publicación sobre Next.js 15: el App Router, Server Components y por qué migré mi portafolio a este stack."
+tags: [nextjs, react, javascript, web]
+cover: "/blog/nextjs-cover.svg"
+coverAlt: "Portada Next.js 15"
+---
+
+Empezar con **Next.js 15** fue un salto enorme frente a mis proyectos anteriores. El App Router cambió por completo la forma en la que pienso las aplicaciones: ahora casi todo el trabajo pesado ocurre en el servidor.
+
+<Callout type="tip" title="Mi recomendación">
+Si vienes de React con Vite o CRA, no intentes aplicar las mismas mentalidades. Server Components cambian las reglas del juego.
+</Callout>
+
+## Por qué migré mi portafolio
+
+Antes usaba una SPA con todo el contenido hardcodeado. Quería:
+
+- Páginas estáticas rápidas
+- Un blog con MDX
+- Metadatos por página sin librerías extra
+
+### Lo primero que noté
+
+El componente más simple:
+
+```jsx
+export default function Home() {
+  return <main>Hola mundo</main>;
+}
+```
+
+Es un *Server Component* por defecto. Si no usas hooks ni estado, nunca llega a tu navegador. Eso significa menos JavaScript y mejor rendimiento.
+
+## Server vs Client Components
+
+La regla de oro:
+
+- **Servidor** por defecto: datos, rendering, MDX
+- **Cliente** (`"use client"`): interactividad, estado, efectos
+
+<QuoteBlock author="Lee Robinson, Vercel">
+Piensa primero en lo que puede correr en el servidor. Solo mueve al cliente lo que de verdad lo necesita.
+</QuoteBlock>
+
+## Un ejemplo con datos
+
+```jsx
+async function getPosts() {
+  const res = await fetch("https://api.example.com/posts");
+  return res.json();
+}
+
+export default async function Blog() {
+  const posts = await getPosts();
+  return posts.map((p) => <h2 key={p.id}>{p.title}</h2>);
+}
+```
+
+Sin estados de carga, sin `useEffect`, sin bibliotecas de data fetching. El servidor se encarga y el HTML llega listo.
+
+<Callout type="info" title="Dato">
+El App Router soporta layouts anidados, `generateStaticParams` para páginas estáticas y `generateMetadata` para SEO por ruta.
+</Callout>
+
+## Conclusión
+
+Next.js 15 + App Router es el stack que uso para mi portafolio y proyectos. Si quieres empezar, este es mi orden de aprendizaje: Server Components, layouts, MDX, luego API routes.
+
+<CarouselBlock images={[
+  { src: "/blog/nextjs-cover.svg", caption: "Portada Next.js" },
+  { src: "/blog/web3-cover.svg", caption: "Portada Web3" }
+]} />
+
+Nos vemos en la siguiente publicación.

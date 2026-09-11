@@ -1,0 +1,67 @@
+---
+title: "Primeros pasos en Web3: de la curiosidad al primer contrato"
+date: "2026-07-20"
+excerpt: "Mi experiencia aprendiendo Solidity y cómo escribí y desplegué mi primer smart contract en una red de test."
+tags: [web3, solidity, blockchain, ethereum]
+cover: "/blog/web3-cover.svg"
+coverAlt: "Portada Web3"
+---
+
+Después de meses escuchando sobre **Web3**, decidí entrar de lleno. Esto es lo que aprendí en mis primeras semanas, en orden.
+
+<Callout type="warning" title="Aviso">
+Todo lo que hice fue en redes de *test* (Goerli/ganache). Nunca uses dinero real para aprender Solidity.
+</Callout>
+
+## Qué es un smart contract
+
+Un contrato inteligente es código que vive en la blockchain y ejecuta lógica de forma transparente e inmutable.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Counter {
+    uint256 public count;
+
+    function increment() public {
+        count += 1;
+    }
+}
+```
+
+Así de simple es el "Hola mundo" de Solidity.
+
+## El flujo de trabajo que usé
+
+1. Escribir el contrato en **Remix** (web) o VS Code
+2. Compilar y revisar el ABI
+3. Conectar una wallet de prueba (MetaMask)
+4. Desplegar en una red de test con faucets gratuitos
+5. Interactuar desde un frontend con **ethers.js**
+
+<QuoteBlock author="Mi primera lección aprendida">
+La blockchain no es lenta por capricho: cada transacción es un consenso entre miles de nodos. Diseña pensando en reducir llamadas.
+</QuoteBlock>
+
+## Frontend mínimo
+
+```jsx
+import { ethers } from "ethers";
+
+const provider = new ethers.BrowserProvider(window.ethereum);
+const signer = await provider.getSigner();
+const contract = new ethers.Contract(address, abi, signer);
+
+await contract.increment();
+```
+
+<Callout type="tip" title="Tip">
+Siempre verifica la cadena (chainId) y la cuenta conectada antes de firmar una transacción.
+</Callout>
+
+## Lo que sigue
+
+De aquí quiero pasar a explorar NFTs, DeFi y quizá un proyecto de finanzas personales sobre blockchain. El material con el que más aprendí fue la documentación oficial y este tipo de notas.
+
+Si estás empezando igual que yo, no te frustres: el primer contrato cuesta, pero después todo hace clic.

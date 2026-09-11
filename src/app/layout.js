@@ -2,6 +2,7 @@ import BackgroundBlobs from "@/components/BackgroundBlobs";
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { site } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "AndNikDev Portfolio",
-  description: "Portafolio de Andrew Nikolayk Muñoz Álvarez",
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
 };
 
 export default function RootLayout({ children }) {
